@@ -22,15 +22,21 @@ wget https://openaipublic.azureedge.net/clip/models/40d365715913c9da98579312b702
 
 ## DataSet
 **MSRVTT**
+
 [video data](http://ms-multimedia-challenge.com/2017/dataset)
+
 [splits and captions](https://github.com/ArrowLuo/CLIP4Clip/releases/download/v0.0/msrvtt_data.zip)
 
 **MSVD**
+
 [video data](https://www.cs.utexas.edu/users/ml/clamp/videoDescription/)
+
 [splits and captions](https://github.com/ArrowLuo/CLIP4Clip/releases/download/v0.0/msvd_data.zip)
 
 **LSMDC**
+
 You must obtain permission from MPII to download and use the data. The download link is [here](https://sites.google.com/site/describingmovies/download).
+
 The 1000 test clips data is [link](http://www.google.com/url?q=http%3A%2F%2Fdatasets.d2.mpi-inf.mpg.de%2FmovieDescription%2Fprotected%2Flsmdc2016%2FLSMDC16_challenge_1000_publictect.csv&sa=D&sntz=1&usg=AFQjCNGIaGVhCeb6zNfUs2UL1zNzoEtaSg).
 
 ## Running
