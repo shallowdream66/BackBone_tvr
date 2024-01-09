@@ -52,5 +52,5 @@ main_retrieval.py \
 --output_dir ckpts/${job_name}
 ```
 
-## 🎗️ Acknowledgments
+## Acknowledgments
 The code is based on [DRL](https://github.com/foolwood/DRL) and [HBI](https://github.com/jpthu17/HBI). We sincerely appreciate for their contributions.
