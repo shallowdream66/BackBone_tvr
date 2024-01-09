@@ -4,7 +4,7 @@
 
 </div>
 
-To facilitate video retrieval research, I built a basic framework， which is based on fine-grained interactive retrieval of [WTI](https://github.com/foolwood/DRL).
+To facilitate video retrieval research, I built a basic framework, which is based on fine-grained interactive retrieval of [WTI](https://github.com/foolwood/DRL).
 
 ## Requirement
 ```shell
