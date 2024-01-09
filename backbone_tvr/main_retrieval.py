@@ -374,7 +374,7 @@ def eval_epoch(args, model, test_dataloader, device):
     # ----------------------------
     # 1. cache the features
     # ----------------------------
-    batch_mask_t, batch_mask_v, batch_feat_t, batch_feat_v, ids_t, ids_v = [], [], [], [], [], []
+    batch_mask_t, batch_mask_v, batch_feat_t, batch_feat_v, batch_cls, ids_t, ids_v = [], [], [], [], [], [], []
 
     with torch.no_grad():
         tic = time.time()
@@ -384,10 +384,11 @@ def eval_epoch(args, model, test_dataloader, device):
             for batch in tqdm(test_dataloader[0]):
                 batch = tuple(t.to(device) for t in batch)
                 text_ids, text_mask, inds = batch
-                sequence_output = model.get_sequence_output(text_ids, text_mask)
+                sequence_output = model.get_text_feat(text_ids, text_mask)
                 ids_t.append(inds)
                 batch_mask_t.append(text_mask)
                 batch_feat_t.append(sequence_output)
+                batch_cls.append(cls)
             ids_t = allgather(torch.cat(ids_t, dim=0), args)
             batch_feat_t = allgather(torch.cat(batch_feat_t, dim=0), args)
             batch_mask_t = allgather(torch.cat(batch_mask_t, dim=0), args)
@@ -419,25 +420,29 @@ def eval_epoch(args, model, test_dataloader, device):
             for batch in tqdm(test_dataloader):
                 batch = tuple(t.to(device) for t in batch)
                 text_ids, text_mask, video, video_mask, inds, idx = batch
-                text_feat, video_feat = model.get_text_video_feat(text_ids, text_mask, video, video_mask)
+                text_feat, video_feat, cls = model.get_text_video_feat(text_ids, text_mask, video, video_mask)
                 ids_t.append(inds)
                 batch_mask_t.append(text_mask)
                 batch_mask_v.append(video_mask)
                 batch_feat_t.append(text_feat)
                 batch_feat_v.append(video_feat)
+                batch_cls.append(cls)
             ids_t = allgather(torch.cat(ids_t, dim=0), args).squeeze()
             batch_mask_t = allgather(torch.cat(batch_mask_t, dim=0), args)
             batch_mask_v = allgather(torch.cat(batch_mask_v, dim=0), args)
             batch_feat_t = allgather(torch.cat(batch_feat_t, dim=0), args)
             batch_feat_v = allgather(torch.cat(batch_feat_v, dim=0), args)
+            batch_cls = allgather(torch.cat(batch_cls, dim=0), args)
             batch_mask_t[ids_t] = batch_mask_t.clone()
             batch_mask_v[ids_t] = batch_mask_v.clone()
             batch_feat_t[ids_t] = batch_feat_t.clone()
             batch_feat_v[ids_t] = batch_feat_v.clone()
+            batch_cls[ids_t] = batch_cls.clone()
             batch_mask_t = batch_mask_t[:ids_t.max() + 1, ...]
             batch_mask_v = batch_mask_v[:ids_t.max() + 1, ...]
             batch_feat_t = batch_feat_t[:ids_t.max() + 1, ...]
             batch_feat_v = batch_feat_v[:ids_t.max() + 1, ...]
+            batch_cls = batch_cls[:ids_t.max() + 1, ...]
             logger.info('[finish] extract text+video feature')
 
     toc1 = time.time()
@@ -448,7 +453,7 @@ def eval_epoch(args, model, test_dataloader, device):
     # ----------------------------------
     logger.info('[start] calculate the similarity')
     with torch.no_grad():
-        sim_matrix = _run_on_single_gpu(model, batch_mask_t, batch_mask_v, batch_feat_t, batch_feat_v)
+        sim_matrix = _run_on_single_gpu(model, batch_mask_t, batch_mask_v, batch_feat_t, batch_feat_v, batch_cls)
         sim_matrix = np.concatenate(tuple(sim_matrix), axis=0)
     logger.info('[end] calculate the similarity')
 
