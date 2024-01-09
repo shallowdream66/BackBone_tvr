@@ -21,9 +21,9 @@ wget https://openaipublic.azureedge.net/clip/models/40d365715913c9da98579312b702
 # wget https://openaipublic.azureedge.net/clip/models/5806e77cd80f8b59890b7e101eabd078d9fb84e6937f9e85e4ecb61988df416f/ViT-B-16.pt
 ```
 
-## Dataset
+## DataSet
 
-**For MSRVTT**
+**MSRVTT**
 
 The official data and video links can be found in [link](http://ms-multimedia-challenge.com/2017/dataset). 
 
@@ -37,7 +37,7 @@ Besides, the raw videos can be found in [sharing](https://github.com/m-bain/froz
 wget https://www.robots.ox.ac.uk/~maxbain/frozen-in-time/data/MSRVTT.zip
 ```
 
-**For MSVD**
+**MSVD**
 
 Raw videos can be download from [link](https://www.cs.utexas.edu/users/ml/clamp/videoDescription/). 
 
@@ -46,7 +46,7 @@ The splits and `raw_captions` can be found in the wonderful job [collaborative-e
 wget https://github.com/ArrowLuo/CLIP4Clip/releases/download/v0.0/msvd_data.zip
 ```
 
-**For LSMDC**
+**LSMDC**
 
 You must obtain permission from MPII to download and use the data. The download link is [here](https://sites.google.com/site/describingmovies/download).
 The 1000 test clips data is [link](http://www.google.com/url?q=http%3A%2F%2Fdatasets.d2.mpi-inf.mpg.de%2FmovieDescription%2Fprotected%2Flsmdc2016%2FLSMDC16_challenge_1000_publictect.csv&sa=D&sntz=1&usg=AFQjCNGIaGVhCeb6zNfUs2UL1zNzoEtaSg). Read our paper and the [dataloader](./dataloaders/dataloader_lsmdc_retrieval.py) for more information.
