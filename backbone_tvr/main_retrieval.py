@@ -418,7 +418,7 @@ def eval_epoch(args, model, test_dataloader, device):
             logger.info('[start] extract text+video feature')
             for batch in tqdm(test_dataloader):
                 batch = tuple(t.to(device) for t in batch)
-                text_ids, text_mask, video, video_mask, inds = batch
+                text_ids, text_mask, video, video_mask, inds, idx = batch
                 text_feat, video_feat = model.get_text_video_feat(text_ids, text_mask, video, video_mask)
                 ids_t.append(inds)
                 batch_mask_t.append(text_mask)
