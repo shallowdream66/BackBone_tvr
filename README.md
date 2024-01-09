@@ -3,7 +3,7 @@
 # BackBone_tvr
 </div>
 
-To facilitate video retrieval research, I built a basic framework, which is based on fine-grained interactive retrieval of [wti](https://github.com/foolwood/DRL).
+To facilitate video retrieval research, I built a basic framework, which is based on fine-grained interaction of [DRL](https://github.com/foolwood/DRL).
 
 ## Requirement
 ```shell
