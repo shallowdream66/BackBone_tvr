@@ -54,3 +54,25 @@ main_retrieval.py \
 
 ## Acknowledgments
 The code is based on [DRL](https://github.com/foolwood/DRL) and [HBI](https://github.com/jpthu17/HBI). We sincerely appreciate for their contributions.
+
+## Deploy on Server
+PyTorch  2.0.0
+Python  3.8(ubuntu20.04)
+Cuda  11.8
+```sh
+git clone https://github.com/shallowdream66/BackBone_tvr.git
+cd autodl-tmp/
+unzip msrvtt_data.zip -d data/MSRVTT/
+unzip MSRVTT_Videos.zip -d data/MSRVTT/
+mv ViT-B-32.pt ../BackBone_tvr/backbone_tvr/tvr/models/
+mv ViT-B-16.pt ../BackBone_tvr/backbone_tvr/tvr/models/
+mv bpe_simple_vocab_16e6.txt.gz ../BackBone_tvr/backbone_tvr/tvr/models/
+cd BackBone_tvr/backbone_tvr/
+pip install ftfy==5.8
+pip install regex
+pip install pandas
+pip install functional
+pip install decord==0.6.0
+pip install opencv-python
+pip install numpy==1.23.0
+```
