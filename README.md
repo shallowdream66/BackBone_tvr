@@ -76,3 +76,6 @@ pip install decord==0.6.0
 pip install opencv-python
 pip install numpy==1.23.0
 ```
+
+## Debug with VsCode
+The [JSON](https://github.com/shallowdream66/BackBone_tvr/blob/main/launch.json) can be used to debug this project.
