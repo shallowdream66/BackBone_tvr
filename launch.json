@@ -31,7 +31,7 @@
                 "--max_frames","12",
                 "--video_framerate","1",
                 "--base_encoder","ViT-B/32",
-                "--output_dir","ckpts/backbone_tvr_msrvtt"
+                "--output_dir","/root/BackBone/backbone/ckpts/backbone_tvr_msrvtt"
             ]
         }
     ]
